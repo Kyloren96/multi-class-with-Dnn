@@ -27,21 +27,6 @@ y = df.iloc[:, -1].values
 X,y = os.SMOTE().fit_sample(X, y)
 
 
-# build network and classification
-def baseline_model():
-    model = Sequential()
-    model.add(Dense(128, activation='tanh',input_shape=(12,)))
-    model.add(Dropout(0.25))
-    model.add(Dense(units=128, activation='tanh'))
-    model.add(Dropout(0.25))
-    model.add(Dense(units=128,activation='tanh'))
-    model.add(Dropout(0.25))
-    model.add(Dense(units=128,activation='tanh'))
-    model.add(Dropout(0.25))
-    model.add(Dense(4, activation='softmax'))
-    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-    return model
-clf = KerasClassifier(build_fn=baseline_model, nb_epoch=40, batch_size=256)
 
 X_train, X_test, Y_train, Y_test = train_test_split(X, y, test_size=0.2, random_state=RANDOM_STATE)
 
